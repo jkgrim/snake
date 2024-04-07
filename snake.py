@@ -20,9 +20,11 @@ clock = pygame.time.Clock()
 snake_block = 10
 snake_speed = 15
 
-# Use a smaller font size for game over screen
 font_style = pygame.font.SysFont(None, 30)
 score_font = pygame.font.SysFont(None, 25)
+
+game_over_sound = pygame.mixer.Sound("game_over.wav")
+game_over_sound.set_volume(0.2)
 
 def message(msg_lines, color, font=font_style):
     y_offset = 0
@@ -37,7 +39,6 @@ def game_over_screen(score):
     while True:
         dis.fill(black)
         
-        # Use the smaller font for game over screen messages
         message(["GG!"], white, font=pygame.font.SysFont(None, 40))
         message(["", "Your Score: " + str(score)], white)
         message(["", "", "1 - Play again"], green if selected_option == 1 else white)
@@ -106,6 +107,7 @@ def gameLoop():
 
             for x in snake_List[:-1]:
                 if x == snake_head:
+                    game_over = True
                     break
 
             for segment in snake_List:
@@ -121,6 +123,7 @@ def gameLoop():
 
             clock.tick(snake_speed)
 
+        game_over_sound.play()
         option = game_over_screen(score)
         if option == 1:
             continue
