@@ -23,6 +23,9 @@ snake_speed = 15
 font_style = pygame.font.SysFont(None, 30)
 score_font = pygame.font.SysFont(None, 25)
 
+eating_sound = pygame.mixer.Sound("eating_sound.wav")
+eating_sound.set_volume(0.2)
+
 game_over_sound = pygame.mixer.Sound("game_over.wav")
 game_over_sound.set_volume(0.2)
 
@@ -120,6 +123,7 @@ def gameLoop():
                 foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
                 length_of_snake += 1
                 score += 10
+                eating_sound.play()
 
             clock.tick(snake_speed)
 
