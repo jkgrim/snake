@@ -39,10 +39,9 @@ def game_over_screen(score):
     while True:
         dis.fill(black)
         
-        message(["GG!"], white, font=pygame.font.SysFont(None, 40))
-        message(["", "Your Score: " + str(score)], white)
-        message(["", "", "1 - Play again"], green if selected_option == 1 else white)
-        message(["", "", "", "2 - Quit"], green if selected_option == 2 else white)
+        message(["Your Score: " + str(score)], white)
+        message(["", "- Play again"], green if selected_option == 1 else white)
+        message(["", "", "- Quit"], green if selected_option == 2 else white)
         
         pygame.display.update()
         
@@ -57,6 +56,7 @@ def game_over_screen(score):
 
 def gameLoop():
     game_over = False
+    level = 1  # Initialize the level
 
     while not game_over:
         x1 = dis_width / 2
